@@ -1,4 +1,4 @@
-package org.DBAccess;
+package org.dbaccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

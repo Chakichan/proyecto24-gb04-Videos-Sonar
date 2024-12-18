@@ -1,4 +1,4 @@
-package org.DBAccess;
+package org.dbaccess;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -12,11 +12,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.openapitools.model.Video;
 
 public class VideoAccess {
 	 //SE DECLARA LA CONEXIÓN
     private static Connection conexion = null ; 
+    private static final Logger logger = LoggerFactory.getLogger(VideoAccess.class);
+    String separador = "---------------------------------------";
+    
     /* ------------------------------------------------------------------ */
     /* --------------METODO PARA REALIZAR LA CONEXION-------------------- */
     /* ------------------------------------------------------------------ */
@@ -96,7 +102,7 @@ public class VideoAccess {
                 }
                 
                 videos.add(video);
-                System.out.println("---------------------------------------");
+                System.out.println(separador);
             }
             rset.close();
         } catch (SQLException e) {
@@ -143,7 +149,7 @@ public class VideoAccess {
                     video.setCountryRestricted(new ArrayList<>(Arrays.asList(countries)));
                 }
                 
-                System.out.println("---------------------------------------");
+                System.out.println(separador);
             } else {
                 System.out.println("No se encontró un video con el ID: " + videoId);
             }
@@ -227,7 +233,7 @@ public class VideoAccess {
     	}
     }
     
-    public ArrayList<Video> dbGetAllVideos() {
+    public List<Video> dbGetAllVideos() {
         Statement st;
         
         System.out.println("---dbGetAllVideos---"); 
@@ -247,18 +253,6 @@ public class VideoAccess {
             	Video video = new Video();
             	fromRstoVideoObject(rset, video);
             	videos.add(video);
-                 /*System.out.println("ID: "+rset.getInt(1));
-                 System.out.println("Duracion: "+rset.getString(2));
-                 System.out.println("Titulo: "+rset.getString(3));
-                 System.out.println("uploadDate: "+rset.getTimestamp(4));
-                 System.out.println("Descripcion: "+rset.getString(5));
-                 System.out.println("Genero: "+rset.getString(6));
-                 System.out.println("Likes: "+rset.getInt(7));
-                 System.out.println("RestriccionEdad: "+rset.getBoolean(8));
-                 System.out.println("RestricciónPaises: "+rset.getArray(9));
-                 
-                 System.out.println("---------------------------------------");
-                 */
             }
             rset.close();
         }catch (SQLException e) {
@@ -342,7 +336,7 @@ public class VideoAccess {
                 }
                 
                 videos.add(video);
-                System.out.println("---------------------------------------");
+                System.out.println(separador);
             }
             
             rset.close();
@@ -679,7 +673,7 @@ public class VideoAccess {
                 video.setViews(rset.getLong(11));
 
                 videos.add(video);
-                System.out.println("---------------------------------------");
+                System.out.println(separador);
             }
 
             rset.close();
@@ -702,7 +696,8 @@ public class VideoAccess {
         PreparedStatement pst = null;
         List<Video> videos = new ArrayList<>();
 
-        System.out.println("---dbConsultarVideosPorTitulo---");
+        // Utilizar logger en lugar de System.out.println
+        logger.info("---dbConsultarVideosPorTitulo---");
 
         try {
             String query = "SELECT * FROM Video WHERE title ILIKE ?";

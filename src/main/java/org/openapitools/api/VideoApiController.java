@@ -11,8 +11,8 @@ import java.util.Optional;
 import javax.annotation.Generated;
 import javax.validation.Valid;
 
-import org.DBAccess.CommentAccess;
-import org.DBAccess.VideoAccess;
+import org.dbaccess.CommentAccess;
+import org.dbaccess.VideoAccess;
 import org.openapitools.model.Comments;
 import org.openapitools.model.Video;
 import org.springframework.beans.factory.annotation.Autowired;

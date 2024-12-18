@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - fix/**           # Ejecutar acciones en cada push a las ramas 'fix/...'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
